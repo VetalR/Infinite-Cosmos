@@ -1,33 +1,45 @@
+from urllib.parse import urlparse
+import os
+from datetime import datetime
 import requests
-from pprint import pprint
 
 
-def download_image(url, path):
+def download_image(urls):
 
-    file_name = 'dvmn_example'
+    dir_image = os.path.abspath('images')
+    files_count = len(os.listdir(dir_image))
 
-    response = requests.get(url)
-    response.raise_for_status()
+    for url in urls:
+        response = requests.get(url)
+        response.raise_for_status()
 
-    with open(f'{path}{file_name}', 'wb') as f:
-        f.write(response.content)
+        file_name = f'spacex_{files_count}.jpg'
+        with open(f'{dir_image}/{file_name}', 'wb') as f:
+            f.write(response.content)
+
+        files_count += 1
 
 
-def get_space_x_start_image():
+def get_spacex_start_image():
 
     url = 'https://api.spacexdata.com/v3/launches'
     response = requests.get(url)
     response.raise_for_status()
 
+    list_start = []
     for start in response.json():
         if start["links"]["flickr_images"]:
-            pprint(start["links"]["flickr_images"], sort_dicts=False)
+            list_start.append(start["links"]["flickr_images"])
+
+    return list_start
+
+
+def fetch_spacex_last_launch():
+
+    img_list = get_spacex_start_image()[-1]
+    download_image(img_list)
 
 
 if __name__ == '__main__':
 
-    get_space_x_start_image()
-
-    # urls = 'https://dvmn.org/media/HST-SM4.jpeg'
-    # img_path = 'images/'
-    # download_image(urls, img_path)
+    fetch_spacex_last_launch()
