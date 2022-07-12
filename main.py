@@ -40,6 +40,14 @@ def fetch_spacex_last_launch():
     download_image(img_list)
 
 
+def get_file_format(url):
+    url_path = urlparse(url).path
+    return (os.path.splitext(url_path)[1])
+
+
 if __name__ == '__main__':
 
-    fetch_spacex_last_launch()
+    kek = 'https://apod.nasa.gov/apod/image/2207/NoctilucentParis_Kulik_1080.jpg'
+    lol = 'http://example.com/image.png?v=9341124'
+    m = 'http://example.com/image.png#about_python'
+    print(get_file_format(m))
