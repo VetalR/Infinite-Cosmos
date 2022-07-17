@@ -21,7 +21,7 @@ def main():
 
     list_start = response.json()
 
-    start_number = 'No images'
+    start_number = None
 
     if not args.start_number:
         list_start.reverse()
@@ -34,12 +34,15 @@ def main():
             if start['flight_number'] == args.start_number:
                 if start["links"]["flickr_images"]:
                     start_number = start["links"]["flickr_images"]
-                break
+                    break
+                if not start["links"]["flickr_images"]:
+                    print('No images')
+                    break
             if args.start_number > len(list_start):
                 print('Spacex has less starts, than you input')
                 break
 
-    if start_number != 'No images':
+    if start_number:
         dir_image = os.path.abspath('images')
         files_count = len(fnmatch.filter(os.listdir(dir_image), 'spacex_*'))
         for url in start_number:

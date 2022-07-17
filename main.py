@@ -38,44 +38,6 @@ def get_spacex_start_image():
     return list_start
 
 
-
-
-
-
-def get_file_format(url):
-    url_path = urlparse(url).path
-    return os.path.splitext(url_path)[1]
-
-
-def get_nasa_astronomy_picture_of_the_day(api_key):
-
-    url = 'https://api.nasa.gov/planetary/apod'
-
-    params = {
-        'api_key': api_key,
-        'hd': True,
-        'count': 10
-    }
-
-    response = requests.get(
-        url=url,
-        params=params
-    )
-
-    dir_image = os.path.abspath('images')
-    files_count = len(fnmatch.filter(os.listdir(dir_image), 'nasa_apod_*'))
-
-    for image in response.json():
-        file_format = get_file_format(url=image['url'])
-        if file_format:
-            response = requests.get(image['url'])
-            response.raise_for_status()
-            file_name = f'nasa_apod_{files_count}{file_format}'
-            with open(f'{dir_image}/{file_name}', 'wb') as f:
-                f.write(response.content)
-            files_count += 1
-
-
 def get_nasa_astronomy_epic_picture(api_key):
 
     epic_url = 'https://api.nasa.gov/EPIC/api/natural/images'
