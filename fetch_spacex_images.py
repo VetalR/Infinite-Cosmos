@@ -4,6 +4,8 @@ import os
 
 import requests
 
+from main import download_image
+
 
 def main():
 
@@ -47,14 +49,8 @@ def main():
         files_count = len(fnmatch.filter(os.listdir(dir_image), 'spacex_*'))
 
         for url in start_number:
-
-            response = requests.get(url)
-            response.raise_for_status()
-
             file_name = f'spacex_{files_count}.jpg'
-            with open(f'{dir_image}/{file_name}', 'wb') as file:
-                file.write(response.content)
-
+            download_image(url, file_name)
             files_count += 1
 
 
