@@ -45,6 +45,7 @@ def main():
     if start_number:
         dir_image = os.path.abspath('images')
         files_count = len(fnmatch.filter(os.listdir(dir_image), 'spacex_*'))
+
         for url in start_number:
 
             response = requests.get(url)

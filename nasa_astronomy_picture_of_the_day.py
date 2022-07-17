@@ -1,11 +1,10 @@
-from urllib.parse import urlparse
+import argparse
+import fnmatch
 import os
-from datetime import datetime
-from pprint import pprint
+from urllib.parse import urlparse
+
 import requests
 from dotenv import load_dotenv
-import fnmatch
-import argparse
 
 
 def get_file_format(url):
