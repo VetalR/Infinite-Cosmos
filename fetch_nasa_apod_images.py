@@ -39,7 +39,7 @@ def main(api_key):
     files_count = len(fnmatch.filter(os.listdir(dir_image), 'nasa_apod_*'))
 
     for image in response.json():
-        file_format = urlparse(url=image['url']).path
+        file_format = os.path.splitext(urlparse(url=image['url']).path)[1]
         if file_format:
             file_name = f'nasa_apod_{files_count}{file_format}'
             download_image(image['url'], file_name)
