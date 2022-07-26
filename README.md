@@ -1,15 +1,18 @@
-# Infinite_cosmos
+# Space Telegram
 
 # Project description
 * This project provide posting images to Telegram bot
 * Download images from Nasa and SpaceX
 
-## Installing
+# Project Goals
+* The code is written for educational purposes on online-course for web-developers `dvmn.org`
+
+## How to install
 * To install it, make sure you have Python 3.8 or greater installed
 * Copy application from repo: 
 `git clone https://github.com/VetalR/Infinite-Cosmos.git`
 
-## Get token and API keys
+## Get token and API key
 * Generate token key NASA, from link `https://api.nasa.gov/`
 * Generate token key Telegram bot
 * Create file into project directory `.env`
