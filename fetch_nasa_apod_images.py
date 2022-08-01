@@ -9,7 +9,9 @@ from dotenv import load_dotenv
 from main import download_image
 
 
-def main(api_key):
+def main():
+    load_dotenv()
+    api_key_nasa = os.getenv('API_KEY_NASA')
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -25,7 +27,7 @@ def main(api_key):
 
     apod_url = 'https://api.nasa.gov/planetary/apod'
     params = {
-        'api_key': api_key,
+        'api_key': api_key_nasa,
         'hd': True,
         'count': img_count
     }
@@ -47,7 +49,4 @@ def main(api_key):
 
 
 if __name__ == '__main__':
-    load_dotenv()
-    api_key_nasa = os.getenv('API_KEY_NASA')
-
-    main(api_key_nasa)
+    main()

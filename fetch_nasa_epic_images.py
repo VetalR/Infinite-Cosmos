@@ -7,11 +7,13 @@ from dotenv import load_dotenv
 from main import download_image
 
 
-def main(api_key):
+def main():
+    load_dotenv()
+    api_key_nasa = os.getenv('API_KEY_NASA')
 
     epic_url = 'https://api.nasa.gov/EPIC/api/natural/images'
     params = {
-        'api_key': api_key
+        'api_key': api_key_nasa
     }
     response = requests.get(
         url=epic_url,
@@ -23,7 +25,7 @@ def main(api_key):
     dir_image = os.path.abspath('images')
     files_count = len(fnmatch.filter(os.listdir(dir_image), 'nasa_epic_*'))
     params = {
-        'api_key': api_key
+        'api_key': api_key_nasa
     }
 
     for image in epic_list:
@@ -32,7 +34,7 @@ def main(api_key):
         img_date = image['date'].split()[0].replace('-', '/')
         img_url = (
             f'https://api.nasa.gov/EPIC/archive/natural/'
-            f'{img_date}/png/{img_name}.png?api_key={api_key}'
+            f'{img_date}/png/{img_name}.png?api_key={api_key_nasa}'
         )
 
         file_name = f'nasa_epic_{files_count}.png'
@@ -41,7 +43,4 @@ def main(api_key):
 
 
 if __name__ == '__main__':
-
-    load_dotenv()
-    api_key_nasa = os.getenv('API_KEY_NASA')
-    main(api_key_nasa)
+    main()
