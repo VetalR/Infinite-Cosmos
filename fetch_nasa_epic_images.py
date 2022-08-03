@@ -19,6 +19,7 @@ def main():
         url=epic_url,
         params=params
     )
+    response.raise_for_status()
 
     epic_list = response.json()
 

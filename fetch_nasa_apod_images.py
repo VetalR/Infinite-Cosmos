@@ -36,6 +36,7 @@ def main():
         url=apod_url,
         params=params
     )
+    response.raise_for_status()
 
     dir_image = os.path.abspath('images')
     files_count = len(fnmatch.filter(os.listdir(dir_image), 'nasa_apod_*'))
