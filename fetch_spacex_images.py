@@ -21,18 +21,18 @@ def main():
     )
     args = parser.parse_args()
 
-    list_start = response.json()
+    spacex_starts = response.json()
 
     start_number = None
 
     if not args.start_number:
-        list_start.reverse()
-        for start in list_start:
+        spacex_starts.reverse()
+        for start in spacex_starts:
             if start["links"]["flickr_images"]:
                 start_number = start["links"]["flickr_images"]
                 break
     else:
-        for start in list_start:
+        for start in spacex_starts:
             if start['flight_number'] == args.start_number:
                 if start["links"]["flickr_images"]:
                     start_number = start["links"]["flickr_images"]
@@ -40,7 +40,7 @@ def main():
                 if not start["links"]["flickr_images"]:
                     print('No images')
                     break
-            if args.start_number > len(list_start):
+            if args.start_number > len(spacex_starts):
                 print('Spacex has less starts, than you input')
                 break
 

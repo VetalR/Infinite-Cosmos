@@ -21,15 +21,12 @@ def main():
     )
     response.raise_for_status()
 
-    epic_list = response.json()
+    epic_suite = response.json()
 
     dir_image = os.path.abspath('images')
     files_count = len(fnmatch.filter(os.listdir(dir_image), 'nasa_epic_*'))
-    params = {
-        'api_key': api_key_nasa
-    }
 
-    for image in epic_list:
+    for image in epic_suite:
 
         img_name = image['image']
         img_date = image['date'].split()[0].replace('-', '/')
