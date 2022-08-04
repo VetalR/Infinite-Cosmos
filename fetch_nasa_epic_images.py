@@ -4,16 +4,16 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from main import download_image
+from image_loader import download_image
 
 
 def main():
     load_dotenv()
-    api_key_nasa = os.getenv('API_KEY_NASA')
+    nasa_api_key = os.getenv('API_KEY_NASA')
 
     epic_url = 'https://api.nasa.gov/EPIC/api/natural/images'
     params = {
-        'api_key': api_key_nasa
+        'api_key': nasa_api_key
     }
     response = requests.get(
         url=epic_url,
@@ -23,8 +23,8 @@ def main():
 
     epic_suite = response.json()
 
-    dir_image = os.path.abspath('images')
-    files_count = len(fnmatch.filter(os.listdir(dir_image), 'nasa_epic_*'))
+    images = os.path.abspath('images')
+    files_count = len(fnmatch.filter(os.listdir(images), 'nasa_epic_*'))
 
     for image in epic_suite:
 
@@ -32,7 +32,7 @@ def main():
         img_date = image['date'].split()[0].replace('-', '/')
         img_url = (
             f'https://api.nasa.gov/EPIC/archive/natural/'
-            f'{img_date}/png/{img_name}.png?api_key={api_key_nasa}'
+            f'{img_date}/png/{img_name}.png?api_key={nasa_api_key}'
         )
 
         file_name = f'nasa_epic_{files_count}.png'

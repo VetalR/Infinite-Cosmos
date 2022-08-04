@@ -4,7 +4,7 @@ import os
 
 import requests
 
-from main import download_image
+from image_loader import download_image
 
 
 def main():

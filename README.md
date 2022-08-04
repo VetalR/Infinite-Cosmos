@@ -18,9 +18,9 @@
 * Generate token key NASA, from link https://api.nasa.gov
 * Generate token key Telegram bot
 * Create file into project directory `.env`
-  * Set into `.env` file a variable `API_KEY_NASA` and use value `generated NASA token key`
+  * Set into `.env` file a variable `NASA_API_KEY` and use value `generated NASA token key`
   * Set into `.env` file a variable `TELEGRAM_BOT_TOKEN`and use value `generated Telegram token key`
-    * Variable NASA example: `API_KEY_NASA=17c09e20ad155405123ac1977542fecf00231da7`
+    * Variable NASA example: `NASA_API_KEY=17c09e20ad155405123ac1977542fecf00231da7`
     * Variable Telegram example: `TELEGRAM_BOT_TOKEN=1234556789:AAA-GFuBvlJGiiTFN4dZWbtJnDM5-WvpSvc`
 
 ## How to use

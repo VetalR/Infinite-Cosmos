@@ -6,12 +6,12 @@ from urllib.parse import urlparse
 import requests
 from dotenv import load_dotenv
 
-from main import download_image
+from image_loader import download_image
 
 
 def main():
     load_dotenv()
-    api_key_nasa = os.getenv('API_KEY_NASA')
+    nasa_api_key = os.getenv('API_KEY_NASA')
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -27,7 +27,7 @@ def main():
 
     apod_url = 'https://api.nasa.gov/planetary/apod'
     params = {
-        'api_key': api_key_nasa,
+        'api_key': nasa_api_key,
         'hd': True,
         'count': img_count
     }
