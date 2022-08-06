@@ -11,25 +11,22 @@ from image_loader import download_image
 
 def main():
     load_dotenv()
-    nasa_api_key = os.getenv('API_KEY_NASA')
+    nasa_api_key = os.getenv('NASA_API_KEY')
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--img_count',
         help='You can choose, how many photos do you need',
-        type=int
+        type=int,
+        default=10
     )
     args = parser.parse_args()
-
-    img_count = 10
-    if args.img_count:
-        img_count = args.img_count
 
     apod_url = 'https://api.nasa.gov/planetary/apod'
     params = {
         'api_key': nasa_api_key,
         'hd': True,
-        'count': img_count
+        'count': args.img_count
     }
 
     response = requests.get(
