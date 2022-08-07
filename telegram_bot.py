@@ -8,8 +8,12 @@ from dotenv import load_dotenv
 PUBLICATION_TIME = 14400
 
 
-def send_picture(token, chat_id):
-    bot = telegram.Bot(token=token)
+def send_picture():
+    load_dotenv()
+    telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
+    telegram_chat_id = os.getenv('CHAT_ID')
+
+    bot = telegram.Bot(token=telegram_token)
     img_list = os.listdir('images/')
     random.shuffle(img_list)
 
@@ -23,10 +27,11 @@ def send_picture(token, chat_id):
 
     while True:
         for img in img_list:
-            bot.send_document(
-                chat_id=chat_id,
-                document=open(f'images/{img}', 'rb')
-            )
+            with open(f'images/{img}', 'rb') as file:
+                bot.send_document(
+                    chat_id=telegram_chat_id,
+                    document=file.read()
+                )
 
             if args.seconds_delay:
                 time.sleep(args.seconds_delay)
@@ -35,8 +40,4 @@ def send_picture(token, chat_id):
 
 
 if __name__ == '__main__':
-    load_dotenv()
-    telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
-    telegram_chat_id = os.getenv('CHAT_ID')
-
-    send_picture(telegram_token, telegram_chat_id)
+    send_picture()

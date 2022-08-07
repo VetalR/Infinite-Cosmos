@@ -9,7 +9,7 @@ from image_loader import download_image
 
 def main():
     load_dotenv()
-    nasa_api_key = os.getenv('API_KEY_NASA')
+    nasa_api_key = os.getenv('NASA_API_KEY')
 
     epic_url = 'https://api.nasa.gov/EPIC/api/natural/images'
     params = {
@@ -29,14 +29,19 @@ def main():
     for image in epic_suite:
 
         img_name = image['image']
-        img_date = image['date'].split()[0].replace('-', '/')
+        img_date, _ = image['date'].replace('-', '/').split()
+
         img_url = (
             f'https://api.nasa.gov/EPIC/archive/natural/'
-            f'{img_date}/png/{img_name}.png?api_key={nasa_api_key}'
+            f'{img_date}/png/{img_name}.png'
         )
 
         file_name = f'nasa_epic_{files_count}.png'
-        download_image(img_url, file_name)
+        download_image(
+            url=img_url,
+            file_name=file_name,
+            params=params
+        )
         files_count += 1
 
 
