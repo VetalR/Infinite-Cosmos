@@ -73,6 +73,6 @@
 ## Simple Example
 * To execute it: 
   ```
-  python3 telegram_bot.py
+  python3 {path/}Infinite-Cosmos/telegram_bot.py
   ```
 * Example output: Images pubished to Telegram
