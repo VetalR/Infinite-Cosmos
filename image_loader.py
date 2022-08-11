@@ -1,11 +1,11 @@
-import os
+from pathlib import Path
 
 import requests
 
 
 def download_image(url, file_name, params=None):
 
-    dir_images = os.path.abspath('images')
+    dir_images = Path('images').resolve().joinpath(file_name)
 
     response = requests.get(
         url=url,
@@ -13,5 +13,4 @@ def download_image(url, file_name, params=None):
     )
     response.raise_for_status()
 
-    with open(f'{dir_images}/{file_name}', 'wb') as file:
-        file.write(response.content)
+    Path(dir_images).write_bytes(response.content)
